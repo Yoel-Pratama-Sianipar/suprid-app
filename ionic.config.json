@@ -1,0 +1,7 @@
+{
+  "name": "suprid-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
