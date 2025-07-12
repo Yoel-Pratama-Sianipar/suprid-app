@@ -1,0 +1,134 @@
+ion-title {
+  font-family: "Montserrat", sans-serif;
+  color: #331b05; // hitam lembut
+  text-align: center;
+}
+
+.qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.qty {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.qris-box,
+.cod-box {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.qris-img {
+  width: 160px;
+  height: auto;
+  margin-top: 8px;
+}
+ion-card-title {
+  color: #00ac8f;
+  font-size: 18px;
+}
+
+ion-segment {
+  color: #ff7300;
+}
+ion-card-content {
+  color: #00ac8f;
+}
+ion-select {
+  color: #00ac8f;
+}
+.qris-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.qris-img {
+  width: 200px;
+  height: auto;
+  margin: 12px 0;
+}
+/* Tambahkan di file SCSS halaman */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.dark ion-select {
+  background-color: #2b2b2b;
+  color: #f7c873;
+  &::part(text) {
+    color: #f7c873;
+  }
+}
+body.dark ion-select::part(icon) {
+  color: #f7c873;
+}
+body.dark ion-select-popover ion-item,
+body.dark ion-select-popover ion-label {
+  background-color: #1e1e1e;
+  color: #f7c873;
+}
+/* =============================== */
+/* 🛠️ PERBAIKAN KONTRAS ION-SELECT SAAT DARK MODE */
+/* =============================== */
+body.dark ion-select {
+  background-color: #2b2b2b !important;
+  color: #f7c873 !important; // warna gold untuk teks
+  --placeholder-color: #888888;
+}
+
+body.dark ion-select::part(text) {
+  color: #f7c873 !important;
+}
+
+body.dark ion-select::part(icon) {
+  color: #f7c873 !important;
+}
+
+body.dark ion-select-popover ion-item,
+body.dark ion-select-popover ion-label {
+  background-color: #1e1e1e;
+  color: #f7c873;
+}
+/* ========================== */
+/* 🌙 FIX: Kontras Select Popover di Mode Gelap */
+body.dark {
+  ::ng-deep ion-select-popover {
+    --ion-background-color: #1c1c1c !important;
+    --ion-text-color: #f7c873 !important;
+  }
+
+  ::ng-deep ion-select-popover ion-item,
+  ::ng-deep ion-select-popover ion-label {
+    background-color: #1c1c1c !important;
+    color: #f7c873 !important;
+  }
+
+  /* Untuk memperjelas lingkaran pilihan */
+  ::ng-deep ion-radio {
+    --color: #d4af37 !important;
+  }
+
+  /* Tombol Cancel & OK */
+  ::ng-deep ion-alert-button {
+    color: #d4af37 !important;
+  }
+}

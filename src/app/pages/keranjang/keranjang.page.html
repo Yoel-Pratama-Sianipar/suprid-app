@@ -1,0 +1,126 @@
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title><b>Keranjang</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fade-in">
+  <!-- 🔁 Kartu per item -->
+  <ion-card *ngFor="let item of cartItems; let i = index">
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img [src]="item.img" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.title }}</h2>
+        <p>Harga: Rp {{ item.basePrice | number: '1.0-0' }}</p>
+        <p>
+          Total: Rp {{ (item.quantity * item.basePrice) | number: '1.0-0' }}
+        </p>
+      </ion-label>
+
+      <ion-buttons slot="end" class="qty-btn">
+        <ion-button size="small" fill="clear" (click)="decreaseQty(item)">
+          <ion-icon name="remove-circle-outline"></ion-icon>
+        </ion-button>
+
+        <ion-text class="qty">{{ item.quantity }}</ion-text>
+
+        <ion-button size="small" fill="clear" (click)="increaseQty(item)">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button
+          size="small"
+          fill="clear"
+          color="danger"
+          (click)="removeItem(i)"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  <!-- 💵 Total Pembayaran -->
+  <ion-card>
+    <ion-card-content>
+      <h3>Total Bayar: Rp {{ totalPrice | number: '1.0-0' }}</h3>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 💳 Metode Pembayaran -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Metode Pembayaran</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-segment [(ngModel)]="selectedPayment">
+        <ion-segment-button value="qris">QRIS</ion-segment-button>
+        <ion-segment-button value="cod">COD</ion-segment-button>
+      </ion-segment>
+
+      <div
+        *ngIf="selectedPayment === 'qris'"
+        class="qris-box ion-padding-top ion-text-center"
+      >
+        <p>Silakan scan QR berikut:</p>
+        <ion-img
+          src="assets/unnamed.png"
+          alt="QRIS"
+          class="qris-img"
+          style="max-width: 200px"
+        ></ion-img>
+        <p>Pesanan akan dibuat setelah pembayaran dikonfirmasi</p>
+      </div>
+
+      <div *ngIf="selectedPayment === 'cod'" class="cod-box ion-padding-top">
+        <p>
+          Pembayaran dilakukan saat pesanan diantar atau di meja. Biaya kirim
+          sesuai jarak.
+        </p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 📍 Lokasi: Alamat atau Nomor Meja -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Posisi Anda</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Alamat -->
+      <ion-item>
+        <ion-input
+          [(ngModel)]="alamatPengiriman"
+          type="text"
+          placeholder="Alamat pengiriman (jika di luar restoran)"
+        >
+        </ion-input>
+      </ion-item>
+
+      <!-- Nomor Meja -->
+      <ion-item>
+        <ion-select
+          [(ngModel)]="nomorMeja"
+          placeholder="Pilih nomor meja (jika makan di tempat)"
+          interface="popover"
+        >
+          <ion-select-option *ngFor="let meja of mejaOptions" [value]="meja">
+            {{ meja }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-note color="medium" class="ion-padding-top">
+        * Silakan isi <b>alamat</b> <u>atau</u> <b>nomor meja</b>. Jangan
+        keduanya.
+      </ion-note>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 🛒 Tombol Checkout -->
+  <ion-button expand="block" color="success" (click)="checkout()">
+    Checkout Sekarang
+  </ion-button>
+</ion-content>

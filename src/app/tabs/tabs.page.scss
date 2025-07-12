@@ -1,0 +1,25 @@
+ion-label {
+  font: 15px "Roboto", sans-serif;
+  color: #0a5a4c;
+}
+/* ============================= */
+/* MODE TERANG (DEFAULT / LIGHT) */
+/* ============================= */
+ion-content.signup-container {
+  --background: #ffffff; // Putih untuk terang
+  color: #000;
+  padding: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* ============================= */
+/* MODE GELAP                    */
+/* ============================= */
+:host-context(body.dark) ion-content.signup-container {
+  --background: linear-gradient(to bottom right, #000000, #1e1e1e);
+  color: #fff;
+}
+ion-toolbar {
+  --background: #d2b48c; // mocca lembut
+  --color: #fff8dc; // putih kekuningan untuk teks
+}

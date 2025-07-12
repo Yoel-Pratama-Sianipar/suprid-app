@@ -1,0 +1,224 @@
+:host {
+  --background: #ff6600;
+  background-color: var(--background);
+  color: #000000;
+  display: block;
+}
+
+/* ===== Toolbar ===== */
+.custom-toolbar {
+  --background: #c4a131;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  gap: 6px;
+}
+
+.toolbar-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e1e1e;
+  margin: 0;
+}
+
+/* ===== Searchbar ===== */
+.custom-searchbar {
+  --background: #ffffff;
+  --color: #333333;
+  --placeholder-color: #999999;
+  --border-radius: 17px;
+  --clear-button-color: #333;
+  width: 100%;
+  height: 34px;
+  font-size: 12px;
+}
+
+/* Placeholder dan input kecil */
+::part(input),
+::part(placeholder) {
+  font-size: 12px;
+}
+
+/* ===== Header Card Utama ===== */
+.card-custom {
+  background-color: #d2b48c;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  padding: 10px;
+  color: #2e2e2e;
+  position: relative;
+  z-index: 2;
+}
+
+ion-card-title {
+  color: #0a5a4c;
+  font-size: 18px;
+}
+
+/* ===== Menu Card ===== */
+.card-menu {
+  border-radius: 12px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.card-menu:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.card-menu:active {
+  transform: scale(0.98);
+}
+
+/* Gambar Menu */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: crisp-edges;
+}
+
+/* ===== Judul Menu & Harga ===== */
+.menu-title {
+  color: #2e2e2e;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 6px;
+  color: #00ac8f;
+}
+
+/* ===== Ikon Favorit ===== */
+.favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 24px;
+  color: #ff3e3e;
+  z-index: 10;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.2);
+}
+
+ion-icon.fav {
+  color: #ccc;
+}
+ion-icon.fav.active {
+  color: #e91e63;
+}
+
+ion-icon.cart {
+  color: #555;
+}
+ion-icon.cart.active {
+  color: #00ac8f;
+}
+
+/* ===== Jumlah dan Kontrol (di halaman Keranjang) ===== */
+.qty {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 12px;
+  color: #2e2e2e;
+}
+
+.qty-control-floating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.qty-control-floating ion-button {
+  --color: #00ac8f;
+  font-size: 22px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.qty-control-floating ion-button:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Loading Indicator ===== */
+.custom-loading {
+  --background: rgba(0, 0, 0, 0.6);
+  --spinner-color: #f9cb40;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ===== Animasi Fade-in Global ===== */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive Breakpoint ===== */
+@media (max-width: 768px) {
+  .price,
+  .qty {
+    font-size: 14px;
+  }
+
+  ion-col {
+    padding: 8px 4px;
+  }
+
+  .custom-searchbar {
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .toolbar-title {
+    font-size: 18px;
+  }
+
+  .image-wrapper {
+    height: 200px;
+  }
+}

@@ -1,0 +1,75 @@
+<ion-content class="login-container">
+  <!-- Dark Mode Toggle Switch -->
+  <ion-toolbar class="theme-toggle-toolbar" color="transparent">
+    <ion-buttons slot="end">
+      <ion-toggle mode="ios" justify="start" (ionChange)="toggleTheme($event)"
+        >Dark Mode</ion-toggle
+      >
+    </ion-buttons>
+  </ion-toolbar>
+
+  <app-auth-header></app-auth-header>
+
+  <div class="form-box">
+    <div class="login-card">
+      <h1 class="title">Hello!</h1>
+      <p class="subtitle">Welcome to <strong>SUPRID_APP</strong></p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+        <ion-item class="input">
+          <ion-input
+            id="login-email"
+            formControlName="email"
+            type="email"
+            placeholder="EMAIL"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="input">
+          <ion-label for="login-password"></ion-label>
+          <ion-input
+            id="login-password"
+            formControlName="password"
+            type="password"
+            placeholder="PASSWORD"
+          ></ion-input>
+        </ion-item>
+
+        <div class="forgot">
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <ion-button
+          expand="block"
+          type="submit"
+          class="login-btn"
+          [disabled]="!loginForm.valid"
+        >
+          LOGIN
+        </ion-button>
+      </form>
+
+      <div class="or">Or login with</div>
+      <div class="social-icons">
+        <div class="social-icons">
+          <img
+            src="assets/google.png"
+            alt="Google G Logo"
+            class="social-icon"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
+            alt="Facebook"
+            class="social-icon"
+          />
+          <img src="assets/apple.png" alt="Apple" class="social-icon" />
+        </div>
+      </div>
+
+      <div class="signup-link">
+        Don't have an account?
+        <a [routerLink]="['/auth/signup']"><strong>Sign Up</strong></a>
+      </div>
+    </div>
+  </div>
+</ion-content>

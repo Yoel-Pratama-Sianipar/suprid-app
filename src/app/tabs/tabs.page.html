@@ -1,0 +1,28 @@
+<ion-tabs>
+  <ion-router-outlet slot="top" id="main"></ion-router-outlet>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" [routerLink]="['/tabs/home']">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="keranjang" [routerLink]="['/tabs/keranjang']">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Keranjang</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="log" [routerLink]="['/tabs/log']">
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-label>Pesanan</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="profile"
+      [routerLink]="['/tabs/profile']"
+      (click)="reloadProfile()"
+    >
+      <ion-icon name="person-circle"></ion-icon>
+      <ion-label>Profil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,85 @@
+<ion-content class="signup-container">
+  <app-auth-header></app-auth-header>
+
+  <div class="form-box">
+    <h1 class="title">Join Us!</h1>
+    <p class="subtitle">Create your <strong>SUPRID_APP</strong> account</p>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="signup-form">
+      <ion-item class="input">
+        <ion-label for="signup-email"></ion-label>
+        <ion-input
+          id="signup-email"
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input">
+        <ion-label for="signup-username"></ion-label>
+        <ion-input
+          id="signup-username"
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input">
+        <ion-label for="signup-password"></ion-label>
+        <ion-input
+          id="signup-password"
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ✅ Konfirmasi Password -->
+      <ion-item class="input">
+        <ion-label for="signup-confirm-password"></ion-label>
+        <ion-input
+          id="signup-confirm-password"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input">
+        <ion-label for="signup-phone"></ion-label>
+        <ion-input
+          id="signup-phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="Phone Number"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input">
+        <ion-label for="signup-address"></ion-label>
+        <ion-input
+          id="signup-address"
+          type="text"
+          formControlName="address"
+          placeholder="Address"
+        ></ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="signup-btn"
+        [disabled]="signupForm.invalid"
+      >
+        SIGN UP
+      </ion-button>
+
+      <!-- Tombol kembali -->
+      <ion-button fill="clear" class="back-button" routerLink="/auth/login">
+        ← Back to login
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

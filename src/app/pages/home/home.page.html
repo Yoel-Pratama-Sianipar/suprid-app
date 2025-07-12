@@ -1,0 +1,85 @@
+<ion-header translucent="true">
+  <ion-toolbar class="custom-toolbar">
+    <div class="toolbar-row">
+      <h3 class="toolbar-title">Home</h3>
+    </div>
+    <div class="toolbar-row">
+      <ion-searchbar
+        class="custom-searchbar"
+        [(ngModel)]="searchTerm"
+        placeholder="Cari menu favoritmu"
+        animated="true"
+        showClearButton="focus"
+      ></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding fade-in">
+  <ion-card class="card-custom">
+    <ion-card-header>
+      <ion-card-title
+        ><b>Hai Big Bos!</b><br />Mau makan apa hari ini?<br />Lirik menu dulu
+        yuk!</ion-card-title
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <!-- Menu yang difilter -->
+        <ion-row *ngFor="let row of filteredMenus; trackBy: trackByFn">
+          <ion-col
+            size="12"
+            size-sm="6"
+            size-md="4"
+            *ngFor="let item of row"
+            class="ion-margin-bottom"
+          >
+            <ion-card class="card-menu">
+              <div class="image-wrapper">
+                <img [src]="item.img" [alt]="item.title" />
+
+                <!-- Ikon Favorit -->
+                <ion-icon
+                  class="favorite-icon"
+                  [name]="item.isFavorite ? 'heart' : 'heart-outline'"
+                  (click)="toggleFavorite(item)"
+                ></ion-icon>
+              </div>
+
+              <ion-card-content>
+                <h4 class="menu-title">{{ item.title }}</h4>
+
+                <!-- Harga -->
+                <p class="price">Rp {{ item.basePrice | number: '1.0-0' }}</p>
+
+                <!-- Tombol Tambahkan ke Keranjang -->
+                <ion-button
+                  expand="block"
+                  shape="round"
+                  fill="solid"
+                  [color]="item.inCart ? 'success' : 'medium'"
+                  (click)="toggleCart(item)"
+                >
+                  <ion-icon
+                    slot="start"
+                    [name]="item.inCart ? 'cart' : 'cart-outline'"
+                  ></ion-icon>
+                  {{ item.inCart ? 'Sudah Ditambahkan' : 'Tambahkan ke
+                  Keranjang' }}
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <!-- Jika tidak ada hasil pencarian -->
+        <ion-row *ngIf="filteredMenus.length === 0">
+          <ion-col size="12" class="ion-text-center">
+            <p><i>Tidak ada menu ditemukan.</i></p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

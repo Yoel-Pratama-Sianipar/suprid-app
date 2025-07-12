@@ -1,37 +1,141 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
+/* Core & Ionic Utility Imports */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* 💥 HAPUS / KOMENTARI INI untuk menghindari konflik */
+/// @import "@ionic/angular/css/palettes/dark.system.css";
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* ========== Light Mode (Default) ========== */
+body {
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  --ion-item-background: #f4f4f4;
+  --ion-color-primary: #d4af37; // gold
+}
+
+/* ========== Dark Mode (Manual) ========== */
+body.dark {
+  --ion-background-color: #1c1c1c;
+  --ion-text-color: #ffffff;
+  --ion-item-background: #2b2b2b;
+  --ion-color-primary: #d4af37;
+}
+
+/* Konten utama mengikuti warna tema */
+ion-content {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+/* Item form */
+ion-item {
+  background-color: var(--ion-item-background);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ion-label,
+ion-input {
+  color: var(--ion-text-color);
+  transition: color 0.3s ease;
+}
+
+/* Transisi global */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Warna dasar */
+:root {
+  --ion-color-primary: #d4af37;
+  --ion-color-dark: #1e1e1e;
+  --ion-color-step-50: #f4f4f4;
+}
+
+/* 💥 HAPUS BAGIAN INI juga untuk menghindari konflik */
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --ion-background-color: #121212;
+//     --ion-text-color: #ffffff;
+//     --ion-color-step-50: #1e1e1e;
+//   }
+// }
+
+body.dark ::placeholder {
+  color: #aaa;
+}
+.social-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 8px;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* Pastikan tetap terlihat di tema gelap */
+body.dark .social-icon {
+  filter: none; /* logo putih memang terlihat di latar gelap */
+}
+
+/* Gaya untuk input & ion-input di mode terang */
+body:not(.dark) ion-input,
+body:not(.dark) input,
+body:not(.dark) textarea {
+  color: #000000 !important;
+  background-color: #ffffff;
+  ion-select-option {
+    color: #00ac8f;
+  }
+}
+/* Placeholder di mode terang */
+body:not(.dark) input::placeholder,
+body:not(.dark) textarea::placeholder {
+  color: #000000 !important;
+}
+
+/* Gaya untuk input di mode gelap */
+body.dark ion-input,
+body.dark input,
+body.dark textarea {
+  color: #ffffff !important;
+  background-color: #1e1e1e;
+}
+
+body.dark ion-searchbar,
+body.dark input,
+body.dark textarea {
+  color: #000000 !important;
+}
+
+body.dark ion-card-content h4,
+body.dark input,
+body.dark textarea {
+  color: #d46204 !important;
+}
+/* Placeholder di mode gelap */
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #055241 !important;
+}
+ion-router-outlet {
+  animation: fadeIn 350ms ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

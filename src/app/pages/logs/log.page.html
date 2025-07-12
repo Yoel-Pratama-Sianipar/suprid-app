@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><b>Pesanan Saya</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fade-in">
+  <ion-segment [(ngModel)]="segment" value="aktif">
+    <ion-segment-button value="aktif">Status Aktif</ion-segment-button>
+    <ion-segment-button value="riwayat">Riwayat</ion-segment-button>
+  </ion-segment>
+
+  <!-- PESANAN AKTIF -->
+  <div *ngIf="segment === 'aktif'">
+    <ion-list *ngIf="pesananAktif.length > 0; else tidakAdaPesanan">
+      <ion-card *ngFor="let pesanan of pesananAktif">
+        <ion-card-header>
+          <ion-card-title>ID: {{ pesanan.id }}</ion-card-title>
+          <ion-card-subtitle>Tanggal: {{ pesanan.date }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of pesanan.items">
+              <ion-thumbnail slot="start">
+                <img [src]="item.img" alt="Menu" />
+              </ion-thumbnail>
+              <ion-label>
+                <h3>{{ item.title }}</h3>
+                <p>Harga: Rp{{ item.price | number: '1.0-0' }}</p>
+                <p>Jumlah: {{ item.quantity }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <ion-item lines="none">
+            <ion-label><b>Total</b></ion-label>
+            <ion-note slot="end" color="primary">
+              Rp{{ pesanan.total | number: '1.0-0' }}
+            </ion-note>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Metode Pembayaran</ion-label>
+            <ion-note slot="end">
+              {{ pesanan.paymentMethod | uppercase }}
+            </ion-note>
+          </ion-item>
+
+          <!-- Lokasi Dine-in -->
+          <ion-item lines="none" *ngIf="pesanan.lokasi?.tipe === 'dine-in'">
+            <ion-label>Nomor Meja</ion-label>
+            <ion-note slot="end">{{ pesanan.lokasi.nomorMeja }}</ion-note>
+          </ion-item>
+
+          <!-- Lokasi Antar -->
+          <ion-item lines="none" *ngIf="pesanan.lokasi?.tipe === 'antar'">
+            <ion-label>Alamat Pengiriman</ion-label>
+            <ion-note slot="end">{{ pesanan.lokasi.alamat }}</ion-note>
+          </ion-item>
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            (click)="confirmOrder(pesanan.id)"
+            class="ion-margin-top"
+          >
+            Konfirmasi Diterima
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <ng-template #tidakAdaPesanan>
+      <p class="text-center">Belum ada pesanan aktif.</p>
+    </ng-template>
+  </div>
+
+  <!-- RIWAYAT PESANAN -->
+  <div *ngIf="segment === 'riwayat'">
+    <ion-list *ngIf="riwayatPesanan.length > 0; else tidakAdaRiwayat">
+      <ion-card *ngFor="let riwayat of riwayatPesanan">
+        <ion-card-header>
+          <ion-card-title>ID: {{ riwayat.id }}</ion-card-title>
+          <ion-card-subtitle>Selesai pada {{ riwayat.date }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of riwayat.items">
+              <ion-thumbnail slot="start">
+                <img [src]="item.img" alt="Menu" />
+              </ion-thumbnail>
+              <ion-label>
+                <h3>{{ item.title }}</h3>
+                <p>Harga: Rp{{ item.price | number: '1.0-0' }}</p>
+                <p>Jumlah: {{ item.quantity }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <ion-item lines="none">
+            <ion-label><b>Total</b></ion-label>
+            <ion-note slot="end" color="primary">
+              Rp{{ riwayat.total | number: '1.0-0' }}
+            </ion-note>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Metode Pembayaran</ion-label>
+            <ion-note slot="end"
+              >{{ riwayat.paymentMethod | uppercase }}</ion-note
+            >
+          </ion-item>
+
+          <ion-item lines="none" *ngIf="riwayat.lokasi?.tipe === 'antar'">
+            <ion-label>Alamat Pengiriman</ion-label>
+            <ion-note slot="end">{{ riwayat.lokasi.alamat }}</ion-note>
+          </ion-item>
+
+          <ion-item lines="none" *ngIf="riwayat.lokasi?.tipe === 'dine-in'">
+            <ion-label>Nomor Meja</ion-label>
+            <ion-note slot="end">{{ riwayat.lokasi.nomorMeja }}</ion-note>
+          </ion-item>
+
+          <ion-badge color="success" class="ion-margin-top">Selesai</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <ng-template #tidakAdaRiwayat>
+      <p class="text-center">Belum ada riwayat pesanan.</p>
+    </ng-template>
+  </div>
+</ion-content>

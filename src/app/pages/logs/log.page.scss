@@ -1,0 +1,71 @@
+ion-title {
+  color: #331b05; // hitam lembut
+  text-align: center;
+}
+ion-segment-button {
+  text-transform: capitalize;
+  color: #00ac8f;
+}
+
+ion-item {
+  margin-bottom: 10px;
+  --background: #e6b27f;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+ion-button {
+  margin-top: 10px;
+  font-size: 14px;
+  --border-radius: 10px;
+  color: #00ac8f;
+}
+
+ion-text {
+  text-align: center;
+  font-style: italic;
+  font-size: 15px;
+}
+
+ion-list {
+  margin-top: 15px;
+  border-radius: 20px;
+}
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #e6b27f;
+}
+
+ion-label h3 {
+  color: #000000;
+}
+
+ion-item {
+  color: #000000;
+  margin-top: 20px;
+}
+ion-card-content {
+  border-radius: 20px;
+  background-color: #e6b27f;
+}
+
+ion-note {
+  color: #000000;
+}
+
+/* Tambahkan di file SCSS halaman */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

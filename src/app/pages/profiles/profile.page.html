@@ -1,0 +1,178 @@
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      <b>Profil Saya</b>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-toggle
+        mode="ios"
+        (ionChange)="toggleTheme($event)"
+        justify="start"
+        label-placement="start"
+        >Dark Mode</ion-toggle
+      >
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fade-in" [fullscreen]="true">
+  <ng-container *ngIf="user; else notLoggedIn">
+    <!-- ✅ User Login: Tampilkan Profil -->
+
+    <!-- Foto Profil -->
+    <!-- Foto Profil -->
+    <div class="profile-picture">
+      <img
+        [src]="getProfilePicUrl(user.profile_pic)"
+        alt="Foto Profil"
+        (error)="onImageError($event)"
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        #fileInput
+        (change)="onFileSelected($event)"
+      />
+      <ion-button
+        fill="clear"
+        size="small"
+        class="edit-btn"
+        (click)="fileInput.click()"
+      >
+        <ion-icon name="camera" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Informasi Akun -->
+    <ion-card class="soft-card">
+      <ion-card-header>
+        <ion-card-title>Informasi Akun</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>Email</ion-label>
+          <ion-text class="ion-text-end">{{ user.email }}</ion-text>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Nama Pengguna</ion-label>
+          <ion-text class="ion-text-end">{{ user.username }}</ion-text>
+          <ion-button
+            fill="clear"
+            size="small"
+            slot="end"
+            (click)="editUsername()"
+          >
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Tanggal Daftar</ion-label>
+          <ion-text class="ion-text-end">
+            {{ user.created_at | date: 'dd MMMM yyyy, HH:mm' }}
+          </ion-text>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Password</ion-label>
+          <ion-text class="ion-text-end">••••••••</ion-text>
+          <ion-button
+            fill="clear"
+            size="small"
+            slot="end"
+            (click)="editPassword()"
+          >
+            <ion-icon name="lock-closed-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Kontak -->
+    <ion-card class="soft-card">
+      <ion-card-header>
+        <ion-card-title>Kontak & Alamat</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>No. Telepon</ion-label>
+          <ion-text class="ion-text-end">{{ user.phone }}</ion-text>
+          <ion-button
+            fill="clear"
+            size="small"
+            slot="end"
+            (click)="editPhone()"
+          >
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Alamat</ion-label>
+          <ion-text class="ion-text-end">{{ user.address }}</ion-text>
+          <ion-button
+            fill="clear"
+            size="small"
+            slot="end"
+            (click)="editAddress()"
+          >
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="favorites.length > 0">
+      <ion-card-header>
+        <ion-card-title>Menu Favorit</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col
+              size="12"
+              size-sm="6"
+              size-md="4"
+              *ngFor="let item of favorites"
+            >
+              <ion-card class="card-menu" style="position: relative">
+                <!-- Tombol Hapus -->
+                <ion-button
+                  fill="clear"
+                  size="small"
+                  color="danger"
+                  style="position: absolute; top: 6px; right: 6px; z-index: 10"
+                  (click)="removeFavorite(item)"
+                >
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+
+                <ion-card-content>
+                  <h4>{{ item.name }}</h4>
+                  <p>Rp {{ item.price | number: '1.0-0' }}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Logout Button -->
+    <ion-button expand="block" color="danger" (click)="logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Logout
+    </ion-button>
+  </ng-container>
+
+  <!-- ❌ User Belum Login -->
+  <ng-template #notLoggedIn>
+    <ion-card>
+      <ion-card-content class="ion-text-center">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+        <h2>Belum Login</h2>
+        <p>Silakan login untuk melihat profil Anda.</p>
+        <ion-button routerLink="/auth/login" expand="block">Login</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>
