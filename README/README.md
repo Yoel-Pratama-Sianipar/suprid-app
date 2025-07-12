@@ -46,17 +46,3 @@ Aplikasi ini dirancang untuk memudahkan pelanggan dalam memesan menu restoran se
 | **PHP & MySQL**  | Backend API dan database                   |
 | **SCSS**         | Untuk styling tema dan variabel warna      |
 | **Session ID**   | Autentikasi berbasis session & cookie      |
-
----
-
-## Struktur Folder Penting
-src/
-├── app/
-│ ├── auth/ ← Halaman login & register
-│ ├── pages/ ← Home, Keranjang, Pesanan, dll
-│ ├── services/ ← HTTP service & auth service
-│ ├── guards/ ← Route guard berdasarkan session
-│ └── tabs/ ← Navigasi utama
-├── assets/ ← Gambar-gambar menu
-├── environments/ ← Konfigurasi environment
-├── theme/ ← Styling dan warna
